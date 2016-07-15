@@ -25,6 +25,7 @@
         android:paddingTop="125dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nelson"
+        android:onClick="nelsonButtonOnClick"
         />
 
     <ImageView
@@ -46,6 +47,5 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/stewart"
         />
-
 
 </RelativeLayout>

@@ -22,7 +22,8 @@
         <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ArtViewingActivity"></activity>
     </application>
 
 </manifest>
