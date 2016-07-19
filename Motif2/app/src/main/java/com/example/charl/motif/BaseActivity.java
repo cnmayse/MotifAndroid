@@ -1,5 +1,6 @@
 package com.example.charl.motif;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -93,7 +95,8 @@ public abstract class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        //These are for the default menu items that Android added with the navigation menu
+       /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -105,6 +108,11 @@ public abstract class BaseActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }*/
+
+        if(id == R.id.nav_gallery){
+            Intent galleryIntent = new Intent(getApplicationContext(), FindGalleryActivity.class);
+            startActivity(galleryIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
