@@ -23,6 +23,9 @@ public class GalleryMenuActivity extends BaseActivity {
      * Show sample art when artist image is selected
      */
     public void nelsonButtonOnClick(View v){
+        setNavHeaderUsername("Ken");
+        setNavHeaderUserEmail("ken12223@gmail.com");
+
         Intent artIntent = new Intent(getApplicationContext(), ArtViewingActivity.class);
         startActivity(artIntent);
     }
