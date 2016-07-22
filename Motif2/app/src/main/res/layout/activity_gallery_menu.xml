@@ -11,10 +11,11 @@
     tools:context="com.example.charl.motif.GalleryMenuActivity">
 
     <ImageView
-    android:id="@+id/greenhill_banner"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/greenhillbanner"
+        android:id="@+id/greenhill_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:src="@drawable/greenhillbanner"
         android:contentDescription="@string/greenhill_banner_description"/>
 
     <ImageView
@@ -25,6 +26,7 @@
         android:paddingTop="125dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nelson"
+        android:onClick="nelsonButtonOnClick"
         />
 
     <ImageView
@@ -46,6 +48,5 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/stewart"
         />
-
 
 </RelativeLayout>
