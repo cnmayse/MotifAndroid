@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('C:/Users/ken12_000/AndroidStudioProjects/motif_keystore/debug.keystore')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
     defaultConfig {
@@ -15,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {
@@ -30,5 +41,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-
 }

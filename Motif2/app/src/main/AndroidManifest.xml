@@ -9,21 +9,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".LoginScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <activity android:name="com.facebook.FacebookActivity"
+                    android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                    android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                    android:label="@string/app_name" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".FindGalleryActivity" />
         <activity android:name=".GalleryMenuActivity" />
+        <activity android:name=".ArtViewingActivity"/>
         <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ArtViewingActivity"></activity>
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>

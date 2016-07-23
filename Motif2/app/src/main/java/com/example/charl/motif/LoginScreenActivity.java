@@ -3,6 +3,7 @@ package com.example.charl.motif;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -108,13 +109,25 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
                textViewName.setText(acct.getDisplayName());
 
 
-
+                //Send the user name and email with the intent to the FindGalleryActivity
+                //From there, the FindGalleryActivity will apply these to the nav header
                 Intent goto_find_gallery = new Intent(getApplicationContext(),FindGalleryActivity.class);
+
+                Bundle outgoingBundle = new Bundle();
+                outgoingBundle.putString("username", acct.getDisplayName());
+                outgoingBundle.putString("email", acct.getEmail());
+
+                goto_find_gallery.putExtras(outgoingBundle);
+
                 startActivity(goto_find_gallery);
+
             } else {
                 //If login fails
                 Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
             }
+
+            //Set navigation header strings
+
         }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
