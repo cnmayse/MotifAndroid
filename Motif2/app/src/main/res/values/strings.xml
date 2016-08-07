@@ -15,4 +15,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="toolbar_name">#CurrentGallery</string>
+    <string name="username_key">usernameKey</string>
+    <string name="email_key">emailKey</string>
+    <string name="nav_header_pref_file_key">navFileKey</string>
 </resources>

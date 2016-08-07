@@ -1,6 +1,8 @@
 package com.example.charl.motif;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +27,9 @@ public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected FrameLayout frameLayout;
+
+    //Value to return if username and/or email not in shared preferences file
+    final String DEFAULT_VALUE = "Unknown";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,9 @@ public abstract class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Add the username and email to the nav header
+        setUpNavHeader();
     }
 
     @Override
@@ -119,5 +127,32 @@ public abstract class BaseActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Add username and email to the nav header if activity called from login activity
+     */
+    private void setUpNavHeader(){
+        //Retrieve username and email from shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key),
+                                                                            Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString(getString(R.string.username_key), DEFAULT_VALUE);
+        String email = sharedPreferences.getString(getString(R.string.email_key), DEFAULT_VALUE);
+
+
+        //Add username and email to the navigation header
+        NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
+        View headerView = navView.getHeaderView(0);
+
+        TextView usernameView = (TextView)headerView.findViewById(R.id.navHeaderUserName);
+        //System.out.println("THIS IS NAME!!!!!!!!!" + usernameView.getText());
+        if(name != null) {
+            usernameView.setText(name);
+        }
+
+        TextView emailView = (TextView)headerView.findViewById(R.id.navHeaderUserEmail);
+        if(email != null) {
+            emailView.setText(email);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.charl.motif;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -32,6 +34,7 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
     private int RC_SIGN_IN = 100;
     private CallbackManager callbackManager;
     private TextView textViewName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,16 +111,14 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
 
                textViewName.setText(acct.getDisplayName());
 
+                //Save username and email in Shared Preferences
+                saveUsername(acct.getDisplayName());
+                saveEmail(acct.getEmail());
+
 
                 //Send the user name and email with the intent to the FindGalleryActivity
                 //From there, the FindGalleryActivity will apply these to the nav header
                 Intent goto_find_gallery = new Intent(getApplicationContext(),FindGalleryActivity.class);
-
-                Bundle outgoingBundle = new Bundle();
-                outgoingBundle.putString("username", acct.getDisplayName());
-                outgoingBundle.putString("email", acct.getEmail());
-
-                goto_find_gallery.putExtras(outgoingBundle);
 
                 startActivity(goto_find_gallery);
 
@@ -134,5 +135,28 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
 
     }
 
+    /**
+     * Save the username in SavedPreferences
+     */
+    private void saveUsername(String username){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key)
+                                                                    ,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(getString(R.string.username_key), username);
+        editor.commit();
+    }
+
+    /**
+     * Save the username in SavedPreferences
+     */
+    private void saveEmail(String email){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key)
+                                                                    ,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(getString(R.string.email_key), email);
+        editor.commit();
+    }
 }
 
