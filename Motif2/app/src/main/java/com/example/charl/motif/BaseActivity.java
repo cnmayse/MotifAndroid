@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Base class that creates a navigation drawer (side-menu).
  * A toolbar is also present, to hold menu button.
@@ -38,8 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
@@ -154,5 +154,12 @@ public abstract class BaseActivity extends AppCompatActivity
         if(email != null) {
             emailView.setText(email);
         }
+    }
+
+    /**
+     * Set the tile of the toolbar
+     */
+    public void setToolbarTitle(String title){
+        ((TextView)findViewById(R.id.toolbar_title)).setText(title);
     }
 }

@@ -14,7 +14,6 @@
         android:id="@+id/greenhill_banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:src="@drawable/greenhillbanner"
         android:contentDescription="@string/greenhill_banner_description"/>
 
@@ -22,31 +21,31 @@
         android:id="@+id/nelson_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/greenhill_banner"
-        android:paddingTop="125dp"
+        android:layout_below="@+id/greenhill_banner"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nelson"
-        android:onClick="nelsonButtonOnClick"
+        android:onClick="artistOnClick"
         />
 
     <ImageView
         android:id="@+id/martiny_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/nelson_button"
-        android:paddingTop="250dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nelson_button"
         android:src="@drawable/martiny"
+        android:onClick="artistOnClick"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         />
 
     <ImageView
         android:id="@+id/stewart_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/martiny_button"
-        android:paddingTop="375dp"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@id/martiny_button"
         android:src="@drawable/stewart"
-        />
+        android:onClick="artistOnClick"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

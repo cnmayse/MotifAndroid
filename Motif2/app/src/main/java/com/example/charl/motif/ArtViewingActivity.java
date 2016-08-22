@@ -1,11 +1,10 @@
 package com.example.charl.motif;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class ArtViewingActivity extends BaseActivity {
 
@@ -20,14 +19,29 @@ public class ArtViewingActivity extends BaseActivity {
 
         //setContentView(R.layout.activity_art_viewing);
 
+        //Set toolbar title to name of artist
+        Intent incomingIntent = this.getIntent();
+        String artistName = incomingIntent.getStringExtra(getString(R.string.artist_name));
+        setToolbarTitle(artistName);
+
+        final ImageAdapter imageAdapter = new ImageAdapter(this);
+
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        gridview.setAdapter(imageAdapter);
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(ArtViewingActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                //Get image ID
+                int imageID = imageAdapter.getImageId(position);
+
+                //Create intent for PieceViewingActivity
+                //Send image ID and the title of selected artwork
+                Intent pieceIntent = new Intent(getApplicationContext(), ArtPieceActivity.class);
+                pieceIntent.putExtra(getString(R.string.piece_image_id), imageID);
+                pieceIntent.putExtra(getString(R.string.art_piece_name), "\"Art Title\"");
+
+                startActivity(pieceIntent);
             }
         });
     }

@@ -23,6 +23,9 @@ public class FindGalleryActivity extends BaseActivity {
 
         //setContentView(R.layout.activity_find_gallery);
 
+        //Set a defualt toolbar title
+        setToolbarTitle("Motif");
+
         //Listener for the ListView in the FindGalleryActivity
         AdapterView.OnItemClickListener listItemClickListener = new AdapterView.OnItemClickListener(){
 
@@ -34,6 +37,10 @@ public class FindGalleryActivity extends BaseActivity {
                 if(listPosition == 0){
                     //if the user chooses position 0 create the intent
                     Intent intent = new Intent(FindGalleryActivity.this, GalleryMenuActivity.class);
+
+                    //Send the chosen gallery name with the intent
+                    intent.putExtra(getString(R.string.gallery_name),"GreenHill");
+
                     //Send intent to GalleryMenuActivity
                     startActivity(intent);
                 }

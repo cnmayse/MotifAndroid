@@ -11,7 +11,8 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"/>
 
     <include
         layout="@layout/app_bar_base"
@@ -25,6 +26,23 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_base"
-        app:menu="@menu/activity_base_drawer" />
+        app:menu="@menu/activity_base_drawer">
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_out"
+            android:text="Logout"
+            android:background="@android:color/transparent"
+            android:onClick="signOutOnClick"/>
+
+    </RelativeLayout>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
