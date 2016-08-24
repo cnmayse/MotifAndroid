@@ -3,9 +3,12 @@ package com.example.charl.motif;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -25,8 +28,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
-public class LoginScreenActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import java.util.Arrays;
+
+public class LoginScreenActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private SignInButton signInButton;
     private GoogleSignInOptions gso;
@@ -38,12 +45,37 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login_screen);
-        LoginButton  loginButton = (LoginButton) findViewById(R.id.login_button);
+
+        //Set up Facebook login button
+        final LoginButton  loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+
         textViewName = (TextView) findViewById(R.id.textViewName);
+
+        //See if the activity is called via logging out.
+        //If so, inform the user that logout was successful
+        Intent intent = getIntent();
+        if(intent != null) {
+            if (intent.hasExtra(getString(R.string.logout_key))) {
+                //Present snackbar to user, with logout message
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout),
+                        R.string.logout_message, Snackbar.LENGTH_LONG);
+
+                //Make snackbar text in center of bar.
+                View snackView = snackbar.getView();
+                View textView = (TextView)snackView.findViewById(android.support.design.R.id.snackbar_text);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                }
+                snackbar.show();
+            }
+        }
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
@@ -158,5 +190,6 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
         editor.putString(getString(R.string.email_key), email);
         editor.commit();
     }
+
 }
 

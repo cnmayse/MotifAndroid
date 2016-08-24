@@ -39,7 +39,7 @@
             android:id="@+id/button_sign_out"
             android:text="Logout"
             android:background="@android:color/transparent"
-            android:onClick="signOutOnClick"/>
+            android:onClick="signOutButtonOnClick"/>
 
     </RelativeLayout>
 

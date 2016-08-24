@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -18,6 +19,12 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
 import org.w3c.dom.Text;
 
 /**
@@ -26,7 +33,7 @@ import org.w3c.dom.Text;
  * Contains all android-default styling right now.
  */
 public abstract class BaseActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     protected FrameLayout frameLayout;
 
@@ -161,5 +168,21 @@ public abstract class BaseActivity extends AppCompatActivity
      */
     public void setToolbarTitle(String title){
         ((TextView)findViewById(R.id.toolbar_title)).setText(title);
+    }
+
+    /**
+     * Sign out button.
+     * Signs the user out of their account.
+     * Gmail or Facebook accouns integrated.
+     * Returns user to the sign-in screen.
+     */
+    public void signOutButtonOnClick(View v){
+        LogoutUtility logoutUtil = new LogoutUtility(this);
+        logoutUtil.logout();
+
+        //Go back to login activity
+        Intent loginScreenIntent = new Intent(getApplicationContext(), LoginScreenActivity.class);
+        loginScreenIntent.putExtra(getString(R.string.logout_key), R.string.logout_clicked);
+        startActivity(loginScreenIntent);
     }
 }
