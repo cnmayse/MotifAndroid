@@ -1,6 +1,7 @@
 package com.example.charl.motif;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -44,7 +45,8 @@ public class ImageAdapter extends BaseAdapter {
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(500, 500));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(1, 1, 1, 1);
+            imageView.setBackgroundColor(Color.BLACK);
         } else {
             imageView = (ImageView) convertView;
         }
@@ -55,8 +57,8 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.sample_art, R.drawable.sample_art,
-            R.drawable.sample_art, R.drawable.sample_art,
+            R.drawable.sample_art,R.drawable.sample_art_2,
+            R.drawable.sample_art_3, R.drawable.sample_art,
             R.drawable.sample_art, R.drawable.sample_art,
             R.drawable.sample_art, R.drawable.sample_art,
             R.drawable.sample_art, R.drawable.sample_art,

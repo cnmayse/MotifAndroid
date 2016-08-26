@@ -9,27 +9,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.charl.motif.ArtPieceActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/artPieceImageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:layout_below="@+id/artPieceImageView"
         android:layout_marginTop="10dp">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/large_text"
-            android:id="@+id/textView"
-            android:layout_below="@+id/artPieceImageView"
-            android:layout_centerHorizontal="true" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/artPieceImageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:background="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingButtonView"
+                android:layout_below="@+id/artPieceImageView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dislikeButton"
+                    android:src="@drawable/thumbs_down_grey"
+                    android:background="@android:color/transparent"
+                    android:onClick="dislikeButtonOnClick"
+                    android:layout_marginRight="30dp"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/likeButton"
+                    android:src="@drawable/thumbs_up_grey"
+                    android:background="@android:color/transparent"
+                    android:onClick="likeButtonOnClick"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/large_text"
+                android:id="@+id/textView"
+                android:layout_below="@+id/ratingButtonView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
     </ScrollView>
 
 </RelativeLayout>
