@@ -41,6 +41,7 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
     private int RC_SIGN_IN = 100;
     private CallbackManager callbackManager;
     private TextView textViewName;
+    final String DEFAULT_VALUE = "Unknown";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,28 +139,39 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
             if (result.isSuccess()) {
                 //Getting google account
                 GoogleSignInAccount acct = result.getSignInAccount();
-
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key),
+                        Context.MODE_PRIVATE);
+                String age = sharedPreferences.getString(getString(R.string.userage_key), DEFAULT_VALUE);
+                String zip = sharedPreferences.getString(getString(R.string.userzip_key), DEFAULT_VALUE);
                 //Displaying name
-
-               textViewName.setText(acct.getDisplayName());
 
                 //Save username and email in Shared Preferences
                 saveUsername(acct.getDisplayName());
                 saveEmail(acct.getEmail());
+                if(age !=null ||zip !=null){
+                    Intent goto_find_gallery = new Intent(getApplicationContext(), FindGalleryActivity.class);
 
+                    startActivity(goto_find_gallery);
+
+                }
+                else{
+                    Intent goto_find_gallery = new Intent(getApplicationContext(), PersonalInfo.class);
+
+                    startActivity(goto_find_gallery);
+
+                }
 
                 //Send the user name and email with the intent to the FindGalleryActivity
                 //From there, the FindGalleryActivity will apply these to the nav header
-                Intent goto_find_gallery = new Intent(getApplicationContext(),FindGalleryActivity.class);
-
-                startActivity(goto_find_gallery);
 
             } else {
-                //If login fails
-                Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
-            }
+                    //If login fails
+                    Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
 
-            //Set navigation header strings
+                }
+
+                //Set navigation header strings
+
 
         }
     @Override

@@ -23,6 +23,8 @@
     <string name="gallery_name">galleryName</string>
     <string name="art_piece_name">artPieceName</string>
     <string name="logout_key">logoutKey</string>
+    <string name="userage_key">userage_key</string>
+    <string name="userzip_key">userzipkey_key</string>
     <string name="logout_clicked">logoutClicked</string>
     <string name="logout_message">Logout successful</string>
     <string name="large_text">

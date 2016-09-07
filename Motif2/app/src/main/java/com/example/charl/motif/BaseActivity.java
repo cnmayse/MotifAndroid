@@ -145,14 +145,19 @@ public abstract class BaseActivity extends AppCompatActivity
                                                                             Context.MODE_PRIVATE);
         String name = sharedPreferences.getString(getString(R.string.username_key), DEFAULT_VALUE);
         String email = sharedPreferences.getString(getString(R.string.email_key), DEFAULT_VALUE);
+        String age = sharedPreferences.getString(getString(R.string.userage_key), DEFAULT_VALUE);
+        String zip = sharedPreferences.getString(getString(R.string.userzip_key), DEFAULT_VALUE);
 
 
         //Add username and email to the navigation header
         NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
         View headerView = navView.getHeaderView(0);
-
+        TextView userage = (TextView)headerView.findViewById(R.id.navHeaderUserAge);
+        TextView userzip = (TextView)headerView.findViewById(R.id.navHeaderZip);
         TextView usernameView = (TextView)headerView.findViewById(R.id.navHeaderUserName);
         //System.out.println("THIS IS NAME!!!!!!!!!" + usernameView.getText());
+        userage.setText(age);
+        userzip.setText(zip);
         if(name != null) {
             usernameView.setText(name);
         }

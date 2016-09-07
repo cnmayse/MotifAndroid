@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/side_nav_bar"
@@ -9,25 +9,72 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/navHeaderUserAge"
+        android:numeric="integer"
+        android:maxLength="3"
+        android:layout_gravity="center_horizontal"
+        android:text="123"
+        android:layout_above="@+id/navHeaderUserName"
+        android:layout_toLeftOf="@+id/navHeaderUserEmail"
+        android:layout_toStartOf="@+id/navHeaderUserEmail"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="20dp" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:src="@android:drawable/sym_def_app_icon"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:layout_above="@+id/navHeaderUserAge"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/navHeaderZip"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/navHeaderUserName"
+        android:layout_alignEnd="@+id/navHeaderUserName"
+        android:layout_marginRight="86dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/navHeaderUserName" />
+        android:id="@+id/navHeaderUserName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:id="@+id/navHeaderUserEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.23"
+        android:maxLength="3"
+        android:inputType="number"
+        android:width="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/navHeaderZip"
+        android:layout_toStartOf="@+id/navHeaderZip"
+        android:layout_marginTop="18dp" />
 
-</LinearLayout>
+</RelativeLayout>

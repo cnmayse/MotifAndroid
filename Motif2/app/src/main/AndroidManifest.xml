@@ -28,6 +28,7 @@
         <activity android:name=".FindGalleryActivity" />
         <activity android:name=".GalleryMenuActivity" />
         <activity android:name=".ArtViewingActivity" />
+
         <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
@@ -37,7 +38,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".ArtPieceActivity" />
+        <activity android:name=".PersonalInfo"></activity>
     </application>
 
 </manifest>
