@@ -11,9 +11,16 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -32,20 +39,26 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
     private int RC_SIGN_IN = 100;
-   // private CallbackManager callbackManager;
-
+    private CallbackManager callbackManager;
+    private TextView textViewName;
     final String DEFAULT_VALUE = "Unknown";
-    final String GUEST_NAME = "Guest";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login_screen);
-        Button guestloginbutton = (Button) findViewById(R.id.guestlogin);
 
+        //Set up Facebook login button
+        final LoginButton  loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+
+        textViewName = (TextView) findViewById(R.id.textViewName);
+
+        //See if the activity is called via logging out.
         //If so, inform the user that logout was successful
         Intent intent = getIntent();
         if(intent != null) {
@@ -64,16 +77,27 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
                 snackbar.show();
             }
         }
-        guestloginbutton.setOnClickListener(new View.OnClickListener(){
 
-            public void onClick(View v) {
-                saveUsername(GUEST_NAME);
-                saveEmail(DEFAULT_VALUE);
-                Intent goto_find_gallery = new Intent(getApplicationContext(), PersonalInfo.class);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
-                startActivity(goto_find_gallery);
-            };
-        });
+
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Intent goto_find_gallery = new Intent(getApplicationContext(),FindGalleryActivity.class);
+                        startActivity(goto_find_gallery);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
 
 
 
@@ -98,7 +122,7 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             //If signin
-
+            callbackManager.onActivityResult(requestCode, resultCode, data);
             if (requestCode == RC_SIGN_IN) {
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 //Calling a new function to handle signin
@@ -117,20 +141,25 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
                 GoogleSignInAccount acct = result.getSignInAccount();
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key),
                         Context.MODE_PRIVATE);
-
-                //Displaying name
                 String age = sharedPreferences.getString(getString(R.string.userage_key), DEFAULT_VALUE);
                 String zip = sharedPreferences.getString(getString(R.string.userzip_key), DEFAULT_VALUE);
+                //Displaying name
+
                 //Save username and email in Shared Preferences
                 saveUsername(acct.getDisplayName());
                 saveEmail(acct.getEmail());
+                if(age !=null ||zip !=null){
+                    Intent goto_find_gallery = new Intent(getApplicationContext(), FindGalleryActivity.class);
 
+                    startActivity(goto_find_gallery);
 
-
+                }
+                else{
                     Intent goto_find_gallery = new Intent(getApplicationContext(), PersonalInfo.class);
 
                     startActivity(goto_find_gallery);
 
+                }
 
                 //Send the user name and email with the intent to the FindGalleryActivity
                 //From there, the FindGalleryActivity will apply these to the nav header

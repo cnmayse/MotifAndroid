@@ -28,6 +28,7 @@
         <activity android:name=".FindGalleryActivity" />
         <activity android:name=".GalleryMenuActivity" />
         <activity android:name=".ArtViewingActivity" />
+        <activity android:name=".ArtPieceActivity"/>
 
         <activity
             android:name=".BaseActivity"
