@@ -32,8 +32,13 @@ public class PersonalInfo extends AppCompatActivity {
         NextActivity = (Button) findViewById(R.id.NextActivityButton);
         username = (TextView) findViewById(R.id.usernametextview3);
         username.setText(name);
-    String age = getResources().getString(R.string.userage_key);
+        String age = sharedPreferences.getString(getString(R.string.userage_key), "");
+        String zip = sharedPreferences.getString(getString(R.string.userzip_key), "");
+            if (!(age.matches("") || zip.matches(""))){
+                Intent goto_find_gallery = new Intent(getApplicationContext(), FindGalleryActivity.class);
 
+                startActivity(goto_find_gallery);
+            }
 
             NextActivity.setOnClickListener(new View.OnClickListener() {
 

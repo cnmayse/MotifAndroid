@@ -184,10 +184,27 @@ public abstract class BaseActivity extends AppCompatActivity
     public void signOutButtonOnClick(View v){
         LogoutUtility logoutUtil = new LogoutUtility(this);
         logoutUtil.logout();
-
+        saveAge(null);
+        saveZip(null);
         //Go back to login activity
         Intent loginScreenIntent = new Intent(getApplicationContext(), LoginScreenActivity.class);
         loginScreenIntent.putExtra(getString(R.string.logout_key), R.string.logout_clicked);
         startActivity(loginScreenIntent);
+    }
+    private void saveAge(String userage){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key)
+                ,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(getString(R.string.userage_key), userage);
+        editor.commit();
+    }
+    private void saveZip(String zip){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.nav_header_pref_file_key)
+                ,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(getString(R.string.userzip_key), zip);
+        editor.commit();
     }
 }
