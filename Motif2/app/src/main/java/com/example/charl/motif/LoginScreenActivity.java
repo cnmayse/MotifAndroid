@@ -148,7 +148,8 @@ public class LoginScreenActivity extends AppCompatActivity implements GoogleApiC
                 //Save username and email in Shared Preferences
                 saveUsername(acct.getDisplayName());
                 saveEmail(acct.getEmail());
-                if(age !=null ||zip !=null){
+
+                if(!age.equals(DEFAULT_VALUE) || !zip.equals(DEFAULT_VALUE)){
                     Intent goto_find_gallery = new Intent(getApplicationContext(), FindGalleryActivity.class);
 
                     startActivity(goto_find_gallery);
